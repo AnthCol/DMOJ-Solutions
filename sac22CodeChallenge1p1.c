@@ -6,3 +6,4 @@ int main() {
     printf("%d", num3 - (num1*num2)); 
     return 0;
 }
+

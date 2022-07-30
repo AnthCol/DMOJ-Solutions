@@ -10,7 +10,7 @@ int main(void){
         scanf("%Lf", &temp); 
         sum += fmodl(temp, 360); 
     }
-    printf("%0.6Lf\n", fmodl(sum, 360)); 
+    printf("%Lf\n", fmodl(sum, 360)); 
     
     
     return 0; 

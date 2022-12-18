@@ -18,29 +18,28 @@ int main (void){
 
     while (temp != '#'){
         switch(temp){
-            case '>': program += temp; break; 
-            case '<': program += temp; break; 
-            case '+': program += temp; break; 
-            case '-': program += temp; break; 
-            case '[': program += temp; break; 
-            case ']': program += temp; break; 
-            case '.': program += temp; break; 
+            case '>': index++; program += temp; break; 
+            case '<': index++; program += temp; break; 
+            case '+': index++; program += temp; break; 
+            case '-': index++; program += temp; break; 
+            case '[': 
+                bracket_stack.push(index);
+                program += temp; 
+                index++; 
+                break; 
+            case ']': 
+                brackets.pb({bracket_stack.top(), index}); 
+                bracket_stack.pop(); 
+                program += temp; 
+                index++; 
+                break; 
+            case '.': index++; program += temp; break; 
         }
         scanf(" %c", &temp); 
     }
 
     program += temp; 
 
-    while (program.at(index) != '#'){
-        if (program.at(index) == '['){
-            bracket_stack.push(index); 
-        }
-        else if (program.at(index) == ']'){
-            brackets.pb({bracket_stack.top(), index}); 
-            bracket_stack.pop(); 
-        }
-        index++; 
-    }
 
     for (int i = 0; i < (int)program.length(); i++){
         switch(program.at(i)){
@@ -68,7 +67,7 @@ int main (void){
                 if (memory_cells[pointer_index] != 0){
                     for (int x = 0; x < (int)brackets.size(); x++){
                         if (brackets[x].second == i){
-                            i = brackets[x].first; 
+                            i = brackets[x].first;
                             break; 
                         }
                     }
